@@ -1,65 +1,187 @@
-import Image from "next/image";
+"use client";
+
+import { useEffect } from "react";
+import { motion, useScroll, useSpring, useMotionValue, useTransform } from "framer-motion";
+import Navbar from "@/components/Navbar";
+import HeroSection from "@/components/HeroSection";
+import ProfileSection from "@/components/ProfileSection";
+import AboutSection from "@/components/AboutSection";
+import SkillsSection from "@/components/SkillsSection";
+import ProjectsSection from "@/components/ProjectsSection";
+import ExperienceSection from "@/components/ExperienceSection";
+import AchievementsSection from "@/components/AchievementsSection";
+import ContactSection from "@/components/ContactSection";
+import Footer from "@/components/Footer";
+import Background from "@/components/Background";
 
 export default function Home() {
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
+  // Track cursor strictly through MotionValues to prevent any React re-renders
+  const mouseX = useMotionValue(-1000);
+  const mouseY = useMotionValue(-1000);
+
+  // Core cursor coordinates
+  const cursorX = useTransform(mouseX, v => v - 8);
+  const cursorY = useTransform(mouseY, v => v - 8);
+
+  // Follower (smooth physics)
+  const smoothX = useSpring(mouseX, { stiffness: 400, damping: 25 });
+  const smoothY = useSpring(mouseY, { stiffness: 400, damping: 25 });
+  const followerX = useTransform(smoothX, v => v - 24);
+  const followerY = useTransform(smoothY, v => v - 24);
+
+  // Background glow (slow physics)
+  const glowSpringX = useSpring(mouseX, { stiffness: 80, damping: 30 });
+  const glowSpringY = useSpring(mouseY, { stiffness: 80, damping: 30 });
+  const glowX = useTransform(glowSpringX, v => v - 300);
+  const glowY = useTransform(glowSpringY, v => v - 300);
+
+  useEffect(() => {
+    const updateMousePosition = (e: MouseEvent) => {
+      mouseX.set(e.clientX);
+      mouseY.set(e.clientY);
+    };
+
+    window.addEventListener("mousemove", updateMousePosition, { passive: true });
+
+    return () => {
+      window.removeEventListener("mousemove", updateMousePosition);
+    };
+  }, [mouseX, mouseY]);
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+    <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", position: "relative" }}>
+      
+      {/* Interactive Canvas Particle Mesh Background */}
+      <Background />
+      
+      {/* Global Scroll Progress Bar */}
+      <motion.div
+        style={{
+          scaleX,
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          height: "3px",
+          background: "linear-gradient(90deg, #7c3aed, #4f46e5)",
+          transformOrigin: "0%",
+          zIndex: 9999,
+        }}
+      />
+
+      {/* Global Interactive Cursor Glow Effect */}
+      <motion.div
+        style={{
+          x: glowX,
+          y: glowY,
+          position: "fixed",
+          top: 0,
+          left: 0,
+          width: "600px",
+          height: "600px",
+          borderRadius: "50%",
+          background: "radial-gradient(circle, rgba(124, 58, 237, 0.04) 0%, transparent 60%)",
+          pointerEvents: "none",
+          zIndex: 50, // Render behind text but above deep background
+        }}
+        className="custom-cursor-glow"
+      />
+
+      {/* Custom Mouse Cursor Core - Mix Blend Difference for interaction */}
+      <motion.div
+        style={{
+          x: cursorX,
+          y: cursorY,
+          position: "fixed",
+          top: 0,
+          left: 0,
+          width: "14px",
+          height: "14px",
+          borderRadius: "50%",
+          background: "#fff",
+          pointerEvents: "none",
+          zIndex: 10000,
+          mixBlendMode: "difference",
+        }}
+        className="custom-cursor-core"
+      />
+      
+      {/* Custom Mouse Cursor Follower */}
+      <motion.div
+        style={{
+          x: followerX,
+          y: followerY,
+          position: "fixed",
+          top: 0,
+          left: 0,
+          width: "48px",
+          height: "48px",
+          borderRadius: "50%",
+          background: "rgba(124, 58, 237, 0.05)",
+          border: "1px solid rgba(124, 58, 237, 0.2)",
+          pointerEvents: "none",
+          zIndex: 9999,
+        }}
+        className="custom-cursor-follower"
+      />
+
+      <Navbar />
+      
+      <main style={{ flex: 1, position: "relative", zIndex: 1 }}>
+        <HeroSection />
+        
+        <ProfileSection />
+        
+        <AboutSection />
+        <SkillsSection />
+        
+        <ProjectsSection />
+        <ExperienceSection />
+        
+        <AchievementsSection />
+        <ContactSection />
       </main>
+
+      <Footer />
+
+      <style>{`
+        /* Hide default cursor on desktop environments */
+        @media (pointer: fine) {
+          body { cursor: none; }
+          a, button, input, textarea { cursor: none; }
+          
+          /* Kinematic Hover Sizing */
+          .custom-cursor-core {
+            transition: width 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+                        height 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+                        margin 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            /* Centering mechanism */
+            margin-top: -7px;
+            margin-left: -7px;
+          }
+
+          body:has(a:hover) .custom-cursor-core,
+          body:has(button:hover) .custom-cursor-core,
+          body:has(.interactive:hover) .custom-cursor-core {
+            width: 50px !important;
+            height: 50px !important;
+            margin-top: -25px !important;
+            margin-left: -25px !important;
+          }
+        }
+        
+        /* Hide custom cursor on touch devices */
+        @media (pointer: coarse) {
+          .custom-cursor-core, .custom-cursor-follower { display: none !important; }
+        }
+      `}</style>
     </div>
   );
 }
