@@ -220,11 +220,12 @@ export default function HeroSection() {
               </div>
             </div>
             <nav className="dash-nav">
-              <div className="dash-nav-item active">⊞ Dashboard</div>
-              <div className="dash-nav-item">❏ Projects</div>
+              <div className="dash-nav-item active"><span>⊞</span> Dashboard</div>
+              <div className="dash-nav-item"><span>❏</span> Projects</div>
               <div className="nav-group-label">Analysis</div>
-              <div className="dash-nav-item">⋄ LeetCode</div>
-              <div className="dash-nav-item">❏ GitHub</div>
+              <div className="dash-nav-item"><span>⋄</span> LeetCode</div>
+              <div className="dash-nav-item"><span>❏</span> GitHub</div>
+              <div className="dash-nav-item"><span>⚙</span> Settings</div>
             </nav>
             <div className="dash-sidebar-footer">
               <div className="footer-stat"><span>Latency</span><span>14ms</span></div>
@@ -298,16 +299,14 @@ export default function HeroSection() {
                     ))}
                   </ul>
                 </div>
-                <div className="dash-card dash-heat">
-                  <h3 className="card-title">Commit Flux</h3>
-                  <div className="heat-grid">
-                    {commitGridData.slice(0, 32).map((week, wi) => (
-                      <div key={wi} className="heat-week">
-                        {week.map((val, di) => (
-                          <div key={di} className="heat-cell" style={{ background: `rgba(139, 92, 246, ${val * 0.2})` }} />
-                        ))}
-                      </div>
-                    ))}
+                <div className="dash-card dash-console">
+                  <h3 className="card-title">Console_Output</h3>
+                  <div className="console-body">
+                    <div className="c-line"><span className="c-p">></span> system.init()</div>
+                    <div className="c-line"><span className="c-p">></span> loading_modules... [OK]</div>
+                    <div className="c-line"><span className="c-p">></span> fetch_portfolio_v4_data</div>
+                    <div className="c-line"><span className="c-p">></span> heartbeat_check: 200ms</div>
+                    <div className="c-line c-active"><span className="c-p">></span> listening_on_port: 3141_</div>
                   </div>
                 </div>
               </div>
@@ -428,22 +427,35 @@ export default function HeroSection() {
         .dash-search-box span { color: rgba(255, 255, 255, 0.2); font-size: 0.8rem; }
         .dash-search-box input { background: transparent; border: none; outline: none; color: #fff; font-size: 0.7rem; width: 120px; }
 
-        .dash-row-alt { display: grid; grid-template-columns: 1.5fr 1fr; gap: 1rem; }
+        .dash-tile { transition: transform 0.2s, background 0.2s; cursor: pointer; }
+        .dash-tile:hover { transform: translateY(-3px); background: rgba(255,255,255,0.05); }
+
+        .dash-row-alt { display: grid; grid-template-columns: 1.5fr 1fr; gap: 1rem; margin-top: 0.5rem; }
         .pulse-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.8rem; }
-        .pulse-item { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05); padding: 0.8rem; border-radius: 12px; }
-        .p-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
-        .p-id { font-size: 0.6rem; font-weight: 800; color: #fff; }
-        .p-status { font-size: 0.5rem; padding: 1px 4px; border-radius: 4px; border: 1px solid; }
-        .p-load-bar { height: 2px; background: rgba(255, 255, 255, 0.05); border-radius: 2px; overflow: hidden; margin: 0.4rem 0; }
+        .pulse-item { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05); padding: 1rem; border-radius: 12px; transition: 0.2s; }
+        .pulse-item:hover { border-color: rgba(139, 92, 246, 0.3); background: rgba(139, 92, 246, 0.02); }
+        .p-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem; }
+        .p-id { font-size: 0.65rem; font-weight: 800; color: #fff; }
+        .p-status { font-size: 0.5rem; padding: 2px 5px; border-radius: 4px; border: 1px solid; font-weight: 700; }
+        .p-load-bar { height: 3px; background: rgba(255, 255, 255, 0.05); border-radius: 2px; overflow: hidden; margin: 0.5rem 0; }
         .p-fill { height: 100%; transition: width 1s ease-in-out; }
         .p-load-text { font-size: 0.55rem; color: rgba(255, 255, 255, 0.2); }
 
-        .health-list { display: flex; flex-direction: column; gap: 0.8rem; }
-        .health-item { display: grid; grid-template-columns: 60px 1fr 30px; align-items: center; gap: 1rem; }
-        .h-label { font-size: 0.55rem; color: rgba(255, 255, 255, 0.25); font-weight: 800; }
-        .h-track { height: 4px; background: rgba(255, 255, 255, 0.05); border-radius: 4px; overflow: hidden; }
-        .h-fill { height: 100%; background: #8b5cf6; border-radius: 4px; }
-        .h-val { font-size: 0.6rem; color: #fff; font-weight: 800; text-align: right; }
+        .health-list { display: flex; flex-direction: column; gap: 1rem; }
+        .health-item { display: grid; grid-template-columns: 75px 1fr 35px; align-items: center; gap: 1rem; }
+        .h-label { font-size: 0.6rem; color: rgba(255, 255, 255, 0.25); font-weight: 800; }
+        .h-track { height: 6px; background: rgba(255, 255, 255, 0.05); border-radius: 4px; overflow: hidden; }
+        .h-fill { height: 100%; background: #8b5cf6; border-radius: 4px; box-shadow: 0 0 10px rgba(139,92,246,0.3); transition: width 1.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
+        .h-val { font-size: 0.65rem; color: #fff; font-weight: 900; text-align: right; }
+
+        .dash-console { background: #000; border: 1px solid rgba(255,255,255,0.05); }
+        .console-body { font-family: var(--font-geist-mono); font-size: 0.65rem; color: rgba(255,255,255,0.4); display: flex; flex-direction: column; gap: 0.3rem; }
+        .c-p { color: #8b5cf6; margin-right: 0.5rem; font-weight: 900; }
+        .c-active { color: #2dd4bf; }
+        .c-active::after { content: '_'; animation: blink 1s infinite; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+        .dash-container { display: flex; background: rgba(4, 4, 12, 0.75); backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 24px; overflow: hidden; min-height: 620px; will-change: transform; }
 
         @media (max-width: 1150px) {
           .ht-main-layout { flex-direction: column; text-align: center; gap: 3rem; }
