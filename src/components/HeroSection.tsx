@@ -44,6 +44,8 @@ export default function HeroSection() {
     { label: "Medium Solved", value: "312", note: "efficient", color: "#2dd4bf" },
     { label: "Hard Conquered", value: "18", note: "top tier", color: "#f59e0b" },
     { label: "Rating", value: "1,519", note: "top 38.7%", color: "#60a5fa" },
+    { label: "Total Commits", value: "1.8K", note: "last year", color: "#ef4444" },
+    { label: "Lines of Code", value: "124K+", note: "production", color: "#ec4899" },
   ], []);
 
   const commitGridData = useMemo(() => 
@@ -56,6 +58,7 @@ export default function HeroSection() {
     { id: "PROJ_LIT", status: "STABLE", load: "12%", color: "#8b5cf6" },
     { id: "CHURN_SNS", status: "BETA", load: "44%", color: "#2dd4bf" },
     { id: "HEALTH_APP", status: "LIVE", load: "08%", color: "#f59e0b" },
+    { id: "SYS_CORE", status: "INIT", load: "00%", color: "#2dd4bf" },
   ], []);
 
   const healthData = useMemo(() => [
@@ -234,7 +237,16 @@ export default function HeroSection() {
           </aside>
 
           <main className="dash-main">
-            <header className="dash-header"><h2 className="dash-title">Overview</h2></header>
+            <header className="dash-header">
+              <h2 className="dash-title">Overview</h2>
+              <div className="dash-status-strip">
+                <span className="s-entry">ENV: DEVELOPMENT</span>
+                <span className="s-sep">|</span>
+                <span className="s-entry">VER: 4.2.0-STABLE</span>
+                <span className="s-sep">|</span>
+                <span className="s-entry">DB_CONN: ACTIVE</span>
+              </div>
+            </header>
             <div className="dash-flow">
               <div className="dash-metrics-grid">
                 {stats.map((s) => (
@@ -244,14 +256,6 @@ export default function HeroSection() {
                     <span className="tile-note">{s.note}</span>
                   </div>
                 ))}
-                <div className="dash-tile dash-skill-tile">
-                  <span className="tile-label">CORE_STACK</span>
-                  <div className="skill-spread">
-                    <span className="s-node">React</span>
-                    <span className="s-node">Next.js</span>
-                    <span className="s-node">Node</span>
-                  </div>
-                </div>
               </div>
 
               {/* Added: Project Pulse & System Health Row */}
@@ -302,11 +306,11 @@ export default function HeroSection() {
                 <div className="dash-card dash-console">
                   <h3 className="card-title">Console_Output</h3>
                   <div className="console-body">
-                    <div className="c-line"><span className="c-p">></span> system.init()</div>
-                    <div className="c-line"><span className="c-p">></span> loading_modules... [OK]</div>
-                    <div className="c-line"><span className="c-p">></span> fetch_portfolio_v4_data</div>
-                    <div className="c-line"><span className="c-p">></span> heartbeat_check: 200ms</div>
-                    <div className="c-line c-active"><span className="c-p">></span> listening_on_port: 3141_</div>
+                    <div className="c-line"><span className="c-p"></span> system.init()</div>
+                    <div className="c-line"><span className="c-p"></span> loading_modules... [OK]</div>
+                    <div className="c-line"><span className="c-p"></span> fetch_portfolio_v4_data</div>
+                    <div className="c-line"><span className="c-p"></span> heartbeat_check: 200ms</div>
+                    <div className="c-line c-active"><span className="c-p"></span> listening_on_port: 3141_</div>
                   </div>
                 </div>
               </div>
@@ -387,7 +391,7 @@ export default function HeroSection() {
         .dash-label-row { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 3rem; padding: 0 1.5rem; }
         .dash-eyebrow { font-family: var(--font-geist-mono); font-size: 0.7rem; color: #8b5cf6; font-weight: 800; letter-spacing: 0.1em; }
         .dash-divider { flex: 1; height: 1px; background: linear-gradient(90deg, rgba(139, 92, 246, 0.2), transparent); }
-        .dash-container { display: flex; background: rgba(4, 4, 12, 0.75); backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 24px; overflow: hidden; height: 500px; will-change: transform; }
+        .dash-container { display: flex; background: rgba(4, 4, 12, 0.75); backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 24px; overflow: hidden; min-height: 520px; will-change: transform; transition: all 0.3s; }
         .dash-sidebar { width: 220px; border-right: 1px solid rgba(255, 255, 255, 0.05); display: flex; flex-direction: column; }
         .dash-logo-box { padding: 2rem 1.5rem; display: flex; align-items: center; gap: 1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
         .dash-logo-icon { width: 28px; height: 28px; background: #8b5cf6; border-radius: 6px; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 900; }
@@ -399,25 +403,28 @@ export default function HeroSection() {
         .nav-group-label { padding: 1.5rem 1rem 0.5rem; font-size: 0.6rem; color: rgba(255, 255, 255, 0.2); text-transform: uppercase; font-weight: 800; letter-spacing: 0.1em; }
         .dash-sidebar-footer { padding: 1.5rem; border-top: 1px solid rgba(255, 255, 255, 0.05); }
         .footer-stat { display: flex; justify-content: space-between; font-size: 0.65rem; color: rgba(255, 255, 255, 0.2); margin-bottom: 0.5rem; }
-        .dash-main { flex: 1; display: flex; flex-direction: column; padding: 2rem; overflow: hidden; }
-        .dash-header { margin-bottom: 2rem; }
-        .dash-title { font-size: 1.4rem; font-weight: 900; color: #fff; }
-        .dash-flow { display: flex; flex-direction: column; gap: 1.25rem; flex: 1; overflow: hidden; }
-        .dash-metrics-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
-        .dash-tile { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 16px; padding: 1.25rem; display: flex; flex-direction: column; gap: 0.2rem; }
-        .tile-label { font-size: 0.55rem; color: rgba(255, 255, 255, 0.25); font-weight: 800; text-transform: uppercase; }
-        .tile-val { font-size: 1.25rem; font-weight: 900; }
-        .tile-note { font-size: 0.6rem; color: rgba(255, 255, 255, 0.15); }
+        .dash-main { flex: 1; display: flex; flex-direction: column; padding: 1.5rem; overflow: hidden; }
+        .dash-header { margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: baseline; }
+        .dash-title { font-size: 1.2rem; font-weight: 950; color: #fff; text-transform: uppercase; letter-spacing: 0.1em; }
+        .dash-status-strip { display: flex; gap: 0.8rem; font-family: var(--font-geist-mono); font-size: 0.5rem; color: rgba(255,255,255,0.25); letter-spacing: 0.05em; }
+        .s-sep { opacity: 0.3; }
+        .dash-flow { display: flex; flex-direction: column; gap: 0.75rem; flex: 1; overflow: hidden; }
+        .dash-metrics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; }
+        .dash-tile { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 1rem; display: flex; flex-direction: column; gap: 0.1rem; transition: transform 0.2s, background 0.2s; cursor: pointer; }
+        .dash-tile:hover { transform: translateY(-2px); background: rgba(255,255,255,0.05); }
+        .tile-label { font-size: 0.5rem; color: rgba(255, 255, 255, 0.25); font-weight: 800; text-transform: uppercase; }
+        .tile-val { font-size: 1.1rem; font-weight: 950; font-family: var(--font-geist-mono); }
+        .tile-note { font-size: 0.55rem; color: rgba(255, 255, 255, 0.12); }
         .dash-skill-tile { grid-column: span 4; flex-direction: row; align-items: center; justify-content: space-between; }
         .skill-spread { display: flex; gap: 0.8rem; }
         .s-node { font-size: 0.65rem; font-weight: 700; color: #fff; background: rgba(255, 255, 255, 0.05); padding: 0.3rem 0.7rem; border-radius: 6px; }
-        .dash-row { display: grid; grid-template-columns: 1.2fr 1fr; gap: 1rem; flex: 1; min-height: 0; }
-        .dash-card { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 20px; padding: 1.5rem; display: flex; flex-direction: column; overflow: hidden; }
-        .card-title { font-size: 0.8rem; font-weight: 800; color: rgba(255, 255, 255, 0.3); text-transform: uppercase; margin-bottom: 1.25rem; letter-spacing: 0.05em; }
-        .log-list { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; flex: 1; overflow-y: auto; }
-        .log-item { display: grid; grid-template-columns: 6px 1fr auto; align-items: center; gap: 1rem; font-size: 0.75rem; color: rgba(255, 255, 255, 0.6); }
+        .dash-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; flex: 1; min-height: 0; }
+        .dash-card { background: rgba(255, 255, 255, 0.015); border: 1px solid rgba(255, 255, 255, 0.04); border-radius: 14px; padding: 1.25rem; display: flex; flex-direction: column; overflow: hidden; }
+        .card-title { font-size: 0.65rem; font-weight: 800; color: rgba(255, 255, 255, 0.2); text-transform: uppercase; margin-bottom: 0.8rem; letter-spacing: 0.05em; }
+        .log-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; flex: 1; overflow-y: auto; }
+        .log-item { display: grid; grid-template-columns: 6px 1fr auto; align-items: center; gap: 0.8rem; font-size: 0.65rem; color: rgba(255, 255, 255, 0.5); }
         .log-dot { width: 5px; height: 5px; border-radius: 50%; }
-        .log-time { color: rgba(255, 255, 255, 0.2); font-size: 0.65rem; }
+        .log-time { color: rgba(255, 255, 255, 0.15); font-size: 0.6rem; }
         .heat-grid { display: flex; gap: 3px; }
         .heat-week { display: flex; flex-direction: column; gap: 3px; }
         .heat-cell { width: 11px; height: 11px; border-radius: 2px; }
@@ -427,35 +434,30 @@ export default function HeroSection() {
         .dash-search-box span { color: rgba(255, 255, 255, 0.2); font-size: 0.8rem; }
         .dash-search-box input { background: transparent; border: none; outline: none; color: #fff; font-size: 0.7rem; width: 120px; }
 
-        .dash-tile { transition: transform 0.2s, background 0.2s; cursor: pointer; }
-        .dash-tile:hover { transform: translateY(-3px); background: rgba(255,255,255,0.05); }
-
-        .dash-row-alt { display: grid; grid-template-columns: 1.5fr 1fr; gap: 1rem; margin-top: 0.5rem; }
-        .pulse-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.8rem; }
-        .pulse-item { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05); padding: 1rem; border-radius: 12px; transition: 0.2s; }
+        .dash-row-alt { display: grid; grid-template-columns: 1.4fr 1fr; gap: 0.8rem; }
+        .pulse-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.6rem; }
+        .pulse-item { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.04); padding: 0.7rem 0.9rem; border-radius: 10px; transition: 0.2s; }
         .pulse-item:hover { border-color: rgba(139, 92, 246, 0.3); background: rgba(139, 92, 246, 0.02); }
-        .p-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem; }
-        .p-id { font-size: 0.65rem; font-weight: 800; color: #fff; }
-        .p-status { font-size: 0.5rem; padding: 2px 5px; border-radius: 4px; border: 1px solid; font-weight: 700; }
-        .p-load-bar { height: 3px; background: rgba(255, 255, 255, 0.05); border-radius: 2px; overflow: hidden; margin: 0.5rem 0; }
+        .p-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem; }
+        .p-id { font-size: 0.6rem; font-weight: 800; color: #fff; }
+        .p-status { font-size: 0.45rem; padding: 1px 4px; border-radius: 3px; border: 1px solid; opacity: 0.8; }
+        .p-load-bar { height: 2px; background: rgba(255, 255, 255, 0.04); border-radius: 2px; overflow: hidden; margin: 0.3rem 0; }
         .p-fill { height: 100%; transition: width 1s ease-in-out; }
-        .p-load-text { font-size: 0.55rem; color: rgba(255, 255, 255, 0.2); }
+        .p-load-text { font-size: 0.5rem; color: rgba(255, 255, 255, 0.15); }
 
-        .health-list { display: flex; flex-direction: column; gap: 1rem; }
-        .health-item { display: grid; grid-template-columns: 75px 1fr 35px; align-items: center; gap: 1rem; }
-        .h-label { font-size: 0.6rem; color: rgba(255, 255, 255, 0.25); font-weight: 800; }
-        .h-track { height: 6px; background: rgba(255, 255, 255, 0.05); border-radius: 4px; overflow: hidden; }
-        .h-fill { height: 100%; background: #8b5cf6; border-radius: 4px; box-shadow: 0 0 10px rgba(139,92,246,0.3); transition: width 1.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
-        .h-val { font-size: 0.65rem; color: #fff; font-weight: 900; text-align: right; }
+        .health-list { display: flex; flex-direction: column; gap: 0.6rem; }
+        .health-item { display: grid; grid-template-columns: 70px 1fr 30px; align-items: center; gap: 0.8rem; }
+        .h-label { font-size: 0.5rem; color: rgba(255, 255, 255, 0.2); font-weight: 800; }
+        .h-track { height: 4px; background: rgba(255, 255, 255, 0.04); border-radius: 4px; overflow: hidden; }
+        .h-fill { height: 100%; background: #8b5cf6; border-radius: 4px; transition: width 1.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
+        .h-val { font-size: 0.55rem; color: #8b5cf6; font-weight: 900; text-align: right; }
 
-        .dash-console { background: #000; border: 1px solid rgba(255,255,255,0.05); }
-        .console-body { font-family: var(--font-geist-mono); font-size: 0.65rem; color: rgba(255,255,255,0.4); display: flex; flex-direction: column; gap: 0.3rem; }
-        .c-p { color: #8b5cf6; margin-right: 0.5rem; font-weight: 900; }
+        .dash-console { background: #000; border: 1px solid rgba(255,255,255,0.03); }
+        .console-body { font-family: var(--font-geist-mono); font-size: 0.55rem; color: rgba(255,255,255,0.3); display: flex; flex-direction: column; gap: 0.2rem; }
+        .c-p { color: #8b5cf6; margin-right: 0.4rem; font-weight: 900; }
         .c-active { color: #2dd4bf; }
         .c-active::after { content: '_'; animation: blink 1s infinite; }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
-
-        .dash-container { display: flex; background: rgba(4, 4, 12, 0.75); backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 24px; overflow: hidden; min-height: 620px; will-change: transform; }
 
         @media (max-width: 1150px) {
           .ht-main-layout { flex-direction: column; text-align: center; gap: 3rem; }
