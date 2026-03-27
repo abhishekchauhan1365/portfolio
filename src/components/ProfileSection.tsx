@@ -110,7 +110,7 @@ export default function ProfileSection() {
 
       <style>{`
         .profile-section {
-          padding: 7rem 1.5rem;
+          padding: 2rem 1.5rem 7rem;
           max-width: 1200px;
           margin: 0 auto;
         }

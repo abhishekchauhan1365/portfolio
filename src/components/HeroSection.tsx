@@ -384,7 +384,7 @@ export default function HeroSection() {
         .ht-sc-line { width: 1px; height: 40px; background: linear-gradient(to bottom, #8b5cf6, transparent); }
         .ht-sc-text { font-family: var(--font-geist-mono); font-size: 0.55rem; color: rgba(255, 255, 255, 0.15); letter-spacing: 0.2em; }
 
-        .dashboard-section { padding: 8rem 0; max-width: 1200px; margin: 0 auto; }
+        .dashboard-section { padding: 8rem 0 3rem; max-width: 1200px; margin: 0 auto; }
         .dash-label-row { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 3rem; padding: 0 1.5rem; }
         .dash-eyebrow { font-family: var(--font-geist-mono); font-size: 0.7rem; color: #8b5cf6; font-weight: 800; letter-spacing: 0.1em; }
         .dash-divider { flex: 1; height: 1px; background: linear-gradient(90deg, rgba(139, 92, 246, 0.2), transparent); }
