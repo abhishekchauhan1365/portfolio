@@ -13,7 +13,6 @@ import AchievementsSection from "@/components/AchievementsSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import Background from "@/components/Background";
-import Preloader from "@/components/Preloader";
 
 export default function Home() {
   const { scrollYProgress } = useScroll();
@@ -58,9 +57,6 @@ export default function Home() {
 
   return (
     <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", position: "relative" }}>
-      
-      {/* Cinematic Startup Sequence */}
-      <Preloader />
       
       {/* Interactive Canvas Particle Mesh Background */}
       <Background />
