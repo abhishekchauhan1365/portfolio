@@ -52,14 +52,14 @@ export default function ProfileSection() {
               <span className="cw-filename">profile.ts</span>
             </div>
             <pre className="cw-body"><code>
-<span className="kw">const</span> <span className="var">developer</span> <span className="op">=</span> {"{"}{"\n"}
-{"  "}<span className="key">name</span><span className="op">:</span>      <span className="str">'Abhishek Singh Chauhan'</span>,{"\n"}
-{"  "}<span className="key">role</span><span className="op">:</span>      <span className="str">'Full-Stack Engineer'</span>,{"\n"}
-{"  "}<span className="key">education</span><span className="op">:</span> <span className="str">'B.Tech CSE — LPU'</span>,{"\n"}
+  <span className="kw">const</span> <span className="var">developer</span> <span className="op">=</span> {"{"}{"\n"}
+{"  "}<span className="key">name</span><span className="op">:</span>      <span className="str">&apos;Abhishek Singh Chauhan&apos;</span>,{"\n"}
+{"  "}<span className="key">role</span><span className="op">:</span>      <span className="str">&apos;Full-Stack Engineer&apos;</span>,{"\n"}
+{"  "}<span className="key">education</span><span className="op">:</span> <span className="str">&apos;B.Tech CSE — LPU&apos;</span>,{"\n"}
 {"  "}<span className="key">cgpa</span><span className="op">:</span>      <span className="num">8.31</span>,{"\n"}
-{"  "}<span className="key">dsa</span><span className="op">:</span>       <span className="str">'400+ problems'</span>,{"\n"}
+{"  "}<span className="key">dsa</span><span className="op">:</span>       <span className="str">&apos;400+ problems&apos;</span>,{"\n"}
 {"  "}<span className="key">rating</span><span className="op">:</span>    <span className="num">1519</span>,{"\n"}
-{"  "}<span className="key">status</span><span className="op">:</span>    <span className="str">'Open to opportunities'</span>{"\n"}
+{"  "}<span className="key">status</span><span className="op">:</span>    <span className="str">&apos;Open to opportunities&apos;</span>{"\n"}
 {"}"};
             </code></pre>
           </div>

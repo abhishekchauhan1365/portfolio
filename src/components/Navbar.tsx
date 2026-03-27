@@ -68,11 +68,7 @@ export default function Navbar() {
           left: 0,
           right: 0,
           zIndex: 100,
-          padding: "0 2rem",
           height: "72px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
           transition: "all 0.3s ease",
           background: scrolled
             ? "rgba(5, 5, 16, 0.85)"
@@ -81,139 +77,149 @@ export default function Navbar() {
           borderBottom: scrolled ? "1px solid rgba(255,255,255,0.06)" : "none",
         }}
       >
-        {/* Logo */}
-        <a
-          href="#home"
-          style={{
-            background: "none",
-            border: "none",
-            cursor: "pointer",
-            padding: 0,
-            textDecoration: "none",
-          }}
-        >
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            style={{
-              fontSize: "1.4rem",
-              fontWeight: 800,
-              letterSpacing: "-0.04em",
-              color: "#e8e8f0",
-              display: "flex",
-              alignItems: "baseline"
-            }}
-          >
-            Abhishek
-            <span style={{ color: "#a78bfa", fontSize: "1.8rem", lineHeight: 0 }}>.</span>
-          </motion.div>
-        </a>
-
-        {/* Desktop Nav */}
-        <nav style={{ display: "flex", gap: "1.5rem", alignItems: "center" }} className="desktop-nav">
-          {navLinks.map((link, i) => {
-            const isActive = activeTab === link.id;
-            return (
-              <motion.a
-                key={link.id}
-                href={`#${link.id}`}
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 * i + 0.3 }}
-                whileHover={{ color: "#a78bfa" }}
-                style={{
-                  background: "none",
-                  border: "none",
-                  cursor: "pointer",
-                  color: isActive ? "#a78bfa" : "rgba(232,232,240,0.7)",
-                  fontSize: "0.85rem",
-                  fontWeight: isActive ? 600 : 500,
-                  transition: "all 0.2s",
-                  display: "none",
-                  position: "relative",
-                  padding: "0.5rem",
-                  textDecoration: "none",
-                }}
-                className="nav-link"
-              >
-                {link.label}
-                {isActive && (
-                  <motion.div
-                    layoutId="activeTabIndicator"
-                    style={{
-                      position: "absolute",
-                      bottom: 0,
-                      left: 0,
-                      right: 0,
-                      height: "2px",
-                      background: "#a78bfa",
-                      borderRadius: "2px",
-                    }}
-                  />
-                )}
-              </motion.a>
-            );
-          })}
-          
-          <motion.a
-            href="https://drive.google.com/file/d/1ARjP22qSJD6hS1e7-RfpVUh9ex5Dq7PB/view?usp=sharing"
-            target="_blank"
-            onClick={handleDownload}
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.6 }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.97 }}
-            style={{
-              background: "linear-gradient(135deg, #7c3aed, #4f46e5)",
-              color: "#fff",
-              textDecoration: "none",
-              padding: "0.5rem 1.25rem",
-              borderRadius: "99px",
-              fontSize: "0.875rem",
-              fontWeight: 600,
-              boxShadow: "0 0 20px rgba(124, 58, 237, 0.35)",
-              display: "none",
-              marginLeft: "1rem",
-            }}
-            className="nav-cta"
-          >
-            Download CV
-          </motion.a>
-
-          {/* Hamburger */}
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="hamburger"
-            aria-label="Toggle menu"
+        <div style={{
+          maxWidth: "1200px",
+          margin: "0 auto",
+          padding: "0 2rem",
+          height: "100%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}>
+          {/* Logo */}
+          <a
+            href="#home"
             style={{
               background: "none",
               border: "none",
               cursor: "pointer",
-              padding: "0.5rem",
-              display: "flex",
-              flexDirection: "column",
-              gap: "5px",
+              padding: 0,
+              textDecoration: "none",
             }}
           >
-            {[0, 1, 2].map((i) => (
-              <motion.span
-                key={i}
-                animate={{
-                  rotate: menuOpen && i === 0 ? 45 : menuOpen && i === 2 ? -45 : 0,
-                  y: menuOpen && i === 0 ? 11 : menuOpen && i === 2 ? -11 : 0,
-                  opacity: menuOpen && i === 1 ? 0 : 1,
-                }}
-                style={{
-                  display: "block",
-                  width: "24px",
-                  height: "2px",
-                  background: "#e8e8f0",
-                  borderRadius: "2px",
-                }}
-              />
-            ))}
-          </button>
-        </nav>
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              style={{
+                fontSize: "1.4rem",
+                fontWeight: 800,
+                letterSpacing: "-0.04em",
+                color: "#e8e8f0",
+                display: "flex",
+                alignItems: "baseline"
+              }}
+            >
+              Abhishek
+              <span style={{ color: "#a78bfa", fontSize: "1.8rem", lineHeight: 0 }}>.</span>
+            </motion.div>
+          </a>
+
+          {/* Desktop Nav */}
+          <nav style={{ display: "flex", gap: "1.5rem", alignItems: "center" }} className="desktop-nav">
+            {navLinks.map((link, i) => {
+              const isActive = activeTab === link.id;
+              return (
+                <motion.a
+                  key={link.id}
+                  href={`#${link.id}`}
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 * i + 0.3 }}
+                  whileHover={{ color: "#a78bfa" }}
+                  style={{
+                    background: "none",
+                    border: "none",
+                    cursor: "pointer",
+                    color: isActive ? "#a78bfa" : "rgba(232,232,240,0.7)",
+                    fontSize: "0.85rem",
+                    fontWeight: isActive ? 600 : 500,
+                    transition: "all 0.2s",
+                    display: "none",
+                    position: "relative",
+                    padding: "0.5rem",
+                    textDecoration: "none",
+                  }}
+                  className="nav-link"
+                >
+                  {link.label}
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeTabIndicator"
+                      style={{
+                        position: "absolute",
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        height: "2px",
+                        background: "#a78bfa",
+                        borderRadius: "2px",
+                      }}
+                    />
+                  )}
+                </motion.a>
+              );
+            })}
+            
+            <motion.a
+              href="https://drive.google.com/file/d/1ARjP22qSJD6hS1e7-RfpVUh9ex5Dq7PB/view?usp=sharing"
+              target="_blank"
+              onClick={handleDownload}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.6 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.97 }}
+              style={{
+                background: "linear-gradient(135deg, #7c3aed, #4f46e5)",
+                color: "#fff",
+                textDecoration: "none",
+                padding: "0.5rem 1.25rem",
+                borderRadius: "99px",
+                fontSize: "0.875rem",
+                fontWeight: 600,
+                boxShadow: "0 0 20px rgba(124, 58, 237, 0.35)",
+                display: "none",
+                marginLeft: "1rem",
+              }}
+              className="nav-cta"
+            >
+              Download CV
+            </motion.a>
+
+            {/* Hamburger */}
+            <button
+              onClick={() => setMenuOpen(!menuOpen)}
+              className="hamburger"
+              aria-label="Toggle menu"
+              style={{
+                background: "none",
+                border: "none",
+                cursor: "pointer",
+                padding: "0.5rem",
+                display: "flex",
+                flexDirection: "column",
+                gap: "5px",
+              }}
+            >
+              {[0, 1, 2].map((i) => (
+                <motion.span
+                  key={i}
+                  animate={{
+                    rotate: menuOpen && i === 0 ? 45 : menuOpen && i === 2 ? -45 : 0,
+                    y: menuOpen && i === 0 ? 11 : menuOpen && i === 2 ? -11 : 0,
+                    opacity: menuOpen && i === 1 ? 0 : 1,
+                  }}
+                  style={{
+                    display: "block",
+                    width: "24px",
+                    height: "2px",
+                    background: "#e8e8f0",
+                    borderRadius: "2px",
+                  }}
+                />
+              ))}
+            </button>
+          </nav>
+        </div>
       </motion.header>
 
       {/* Mobile Menu */}

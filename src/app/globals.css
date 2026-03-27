@@ -1,21 +1,22 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
-  --background: #02020e;
-  --foreground: #eaeaf5;
+  --background: #030712;
+  --foreground: #ffffff;
   --accent: #7c3aed;
-  --accent-2: #4f46e5;
-  --accent-light: #a78bfa;
-  --accent-glow: rgba(124, 58, 237, 0.35);
-  --surface: #08081a;
-  --surface-2: #0e0e24;
-  --border: rgba(167, 139, 250, 0.08);
-  --text-muted: #5a5a80;
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --accent-light: rgba(124, 58, 237, 0.1);
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --text-dim: #9ca3af;
+  --font-geist-sans: var(--font-geist-sans);
+  --font-geist-mono: var(--font-geist-mono);
+  
+  /* Layout Architecture */
+  --page-max-width: 1400px;
+  --section-spacing: 12rem;
 }
-
-
 
 * {
   box-sizing: border-box;
@@ -25,59 +26,122 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 80px;
+  background: var(--background);
+  overflow-x: hidden;
+  cursor: default;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans), Arial, sans-serif;
-  overflow-x: hidden;
+  font-family: var(--font-geist-sans);
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Scrollbar */
+/* ── Reference: Grid Overlay ── */
+.grid-overlay {
+  position: fixed;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+  background-size: 50px 50px;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Typography Hub */
+h1, h2, h3, h4 {
+  font-family: var(--font-geist-sans);
+  letter-spacing: -0.06em;
+  font-weight: 950;
+  line-height: 0.85;
+}
+
+p {
+  color: #94a3b8;
+  font-weight: 400;
+  line-height: 1.8;
+  letter-spacing: -0.01em;
+}
+
+/* Rigid System Utilities */
+.studio-container {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+@media (min-width: 1024px) {
+  .studio-container {
+    padding: 0 80px;
+  }
+}
+
+.system-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+  padding: 8rem 0;
+}
+
+@media (min-width: 1024px) {
+  .system-row {
+    flex-direction: row;
+    gap: 0;
+  }
+  .system-col-left {
+    width: 33.333%;
+    padding-right: 4rem;
+  }
+  .system-col-right {
+    width: 66.666%;
+    border-left: 1px solid rgba(255, 255, 255, 0.04);
+    padding-left: 6rem;
+  }
+}
+
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.4em;
+  color: #6366f1;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  display: block;
+}
+
+.glass-panel {
+  background: rgba(255, 255, 255, 0.015);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 24px;
+}
+
+.glass-panel:hover {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+/* Custom Scrollbar */
 ::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: var(--background); }
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, var(--accent), var(--accent-2));
-  border-radius: 4px;
-}
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.05); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: #6366f1; }
 
-/* Selection */
-::selection {
-  background: rgba(124, 58, 237, 0.4);
-  color: #fff;
-}
-
-/*
-  Multi-layer page lighting system:
-  Layer 1 — top-center violet aurora bloom
-  Layer 2 — bottom-right deep indigo counter-light
-  Layer 3 — Radial edge vignette (darkens corners)
-*/
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background:
-    /* Top center bloom */
-    radial-gradient(ellipse 70% 45% at 50% -5%,  rgba(124, 58, 237, 0.13) 0%, transparent 70%),
-    /* Left accent */
-    radial-gradient(ellipse 50% 60% at -5% 40%,  rgba(79, 70, 229, 0.07)  0%, transparent 65%),
-    /* Bottom-right counter light */
-    radial-gradient(ellipse 55% 50% at 105% 100%, rgba(99, 60, 220, 0.08)  0%, transparent 65%);
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* Edge vignette — darkens far corners */
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: radial-gradient(ellipse 100% 100% at 50% 50%, transparent 40%, rgba(2, 2, 14, 0.75) 100%);
-  pointer-events: none;
-  z-index: 0;
+/* Success Triangle Bullet */
+.bullet-triangle {
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 10px solid #10b981;
+  display: inline-block;
+  margin-right: 0.75rem;
 }

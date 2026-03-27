@@ -8,121 +8,267 @@ export default function Footer() {
   return (
     <footer style={{ position: "relative", overflow: "hidden" }}>
 
-      {/* ── Tea CTA section ─────────────────────────────── */}
+      {/* ── Enhanced Tea CTA section ─────────────────────────────── */}
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         style={{
-          maxWidth: "900px",
+          maxWidth: "1200px",
           margin: "0 auto",
           padding: "5rem 2rem 0",
-          display: "flex",
-          alignItems: "center",
-          gap: "3rem",
-          flexWrap: "wrap",
-          justifyContent: "center",
         }}
       >
-        {/* Tea image */}
-        <div style={{ position: "relative", flexShrink: 0 }}>
-          <img
-            src="/cup_of_tea.png"
-            alt="A warm cup of tea"
-            style={{
-              width: "clamp(140px, 20vw, 200px)",
-              height: "clamp(140px, 20vw, 200px)",
-              objectFit: "cover",
-              borderRadius: "24px",
-              display: "block",
-              filter: "brightness(0.92) contrast(1.05)",
-              boxShadow: "0 20px 50px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.05)",
-            }}
-          />
-          {/* Steam emoji overlay */}
-          <span style={{
+        {/* Card-style container for tea section */}
+        <div style={{
+          background: "linear-gradient(135deg, rgba(124, 58, 237, 0.08), rgba(79, 70, 229, 0.03))",
+          borderRadius: "32px",
+          border: "1px solid rgba(167, 139, 250, 0.15)",
+          backdropFilter: "blur(8px)",
+          padding: "2rem",
+          position: "relative",
+          overflow: "hidden",
+        }}>
+          {/* Decorative elements */}
+          <div style={{
             position: "absolute",
-            top: "-18px",
-            left: "50%",
-            transform: "translateX(-50%)",
-            fontSize: "1.6rem",
-            filter: "drop-shadow(0 0 8px rgba(167,139,250,0.4))",
-            animation: "float-steam 3s ease-in-out infinite",
-          }}>☕</span>
-        </div>
+            top: "-50%",
+            right: "-20%",
+            width: "300px",
+            height: "300px",
+            background: "radial-gradient(circle, rgba(167, 139, 250, 0.15), transparent)",
+            borderRadius: "50%",
+            pointerEvents: "none",
+          }} />
+          <div style={{
+            position: "absolute",
+            bottom: "-30%",
+            left: "-10%",
+            width: "200px",
+            height: "200px",
+            background: "radial-gradient(circle, rgba(45, 212, 191, 0.1), transparent)",
+            borderRadius: "50%",
+            pointerEvents: "none",
+          }} />
 
-        {/* Text */}
-        <div style={{ maxWidth: "380px" }}>
-          <p style={{
-            fontFamily: "var(--font-geist-mono)",
-            fontSize: "0.7rem",
-            fontWeight: 600,
-            letterSpacing: "0.12em",
-            textTransform: "uppercase",
-            color: "rgba(167,139,250,0.5)",
-            marginBottom: "0.75rem",
+          <div style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            gap: "2rem",
+            flexWrap: "wrap",
+            position: "relative",
+            zIndex: 2,
           }}>
-            If my work helped you
-          </p>
-          <h3 style={{
-            fontSize: "clamp(1.6rem, 4vw, 2.2rem)",
-            fontWeight: 900,
-            letterSpacing: "-0.03em",
-            color: "#eaeaf5",
-            lineHeight: 1.15,
-            marginBottom: "1rem",
-          }}>
-            Wanna buy me<br />a cup of tea?
-          </h3>
-          <p style={{
-            fontSize: "0.9rem",
-            color: "rgba(234,234,245,0.4)",
-            lineHeight: 1.7,
-            marginBottom: "1.5rem",
-          }}>
-            I build things late into the night — fuelled by tea and the joy of solving problems.
-            If you liked my work, a small gesture means a lot. ☕
-          </p>
-          <motion.a
-            href="https://buymeacoffee.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={{ scale: 1.04, y: -2 }}
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "0.5rem",
-              padding: "0.65rem 1.5rem",
-              background: "linear-gradient(135deg, #7c3aed, #4f46e5)",
-              color: "#fff",
-              borderRadius: "10px",
-              fontWeight: 700,
-              fontSize: "0.88rem",
-              textDecoration: "none",
-              boxShadow: "0 8px 24px -6px rgba(124,58,237,0.55)",
-            }}
-          >
-            ☕ Buy me a tea
-          </motion.a>
+            {/* Left side - Tea imagery with steam animation */}
+            <div style={{
+              flex: "0 0 auto",
+              position: "relative",
+            }}>
+              <div style={{
+                position: "relative",
+                width: "180px",
+                height: "180px",
+                margin: "0 auto",
+              }}>
+                <div style={{
+                  position: "absolute",
+                  inset: 0,
+                  background: "radial-gradient(circle, rgba(167, 139, 250, 0.2), transparent)",
+                  borderRadius: "50%",
+                  filter: "blur(20px)",
+                }} />
+                <img
+                  src="/cup_of_tea.png"
+                  alt="A warm cup of tea"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    borderRadius: "50%",
+                    display: "block",
+                    filter: "brightness(0.95) contrast(1.08)",
+                    boxShadow: "0 25px 40px -12px rgba(0,0,0,0.5), 0 0 0 2px rgba(167,139,250,0.2)",
+                    position: "relative",
+                    zIndex: 1,
+                  }}
+                />
+                {/* Animated steam rings */}
+                <div style={{
+                  position: "absolute",
+                  top: "-15px",
+                  left: "50%",
+                  transform: "translateX(-50%)",
+                  display: "flex",
+                  gap: "8px",
+                  pointerEvents: "none",
+                }}>
+                  {[...Array(3)].map((_, i) => (
+                    <motion.div
+                      key={i}
+                      animate={{
+                        y: [-5, -15, -5],
+                        opacity: [0.4, 0.8, 0.4],
+                        scale: [0.8, 1.2, 0.8],
+                      }}
+                      transition={{
+                        duration: 2 + i * 0.3,
+                        repeat: Infinity,
+                        delay: i * 0.5,
+                      }}
+                      style={{
+                        width: `${8 + i * 3}px`,
+                        height: `${8 + i * 3}px`,
+                        background: "radial-gradient(circle, rgba(167, 139, 250, 0.6), transparent)",
+                        borderRadius: "50%",
+                        filter: "blur(2px)",
+                      }}
+                    />
+                  ))}
+                </div>
+                <motion.span
+                  animate={{ rotate: [0, 5, -5, 0] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                  style={{
+                    position: "absolute",
+                    bottom: "-10px",
+                    right: "10px",
+                    fontSize: "2rem",
+                    filter: "drop-shadow(0 0 6px rgba(167,139,250,0.5))",
+                  }}
+                >
+                  ☕
+                </motion.span>
+              </div>
+            </div>
+
+            {/* Right side - Text and CTA */}
+            <div style={{
+              flex: 1,
+              minWidth: "250px",
+            }}>
+              <div style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "0.5rem",
+                background: "rgba(167, 139, 250, 0.12)",
+                padding: "0.3rem 1rem",
+                borderRadius: "40px",
+                marginBottom: "1rem",
+              }}>
+                <span style={{
+                  width: "8px",
+                  height: "8px",
+                  background: "#f59e0b",
+                  borderRadius: "50%",
+                  display: "inline-block",
+                }} />
+                <span style={{
+                  fontFamily: "var(--font-geist-mono)",
+                  fontSize: "0.7rem",
+                  fontWeight: 600,
+                  letterSpacing: "0.08em",
+                  color: "#f59e0b",
+                }}>
+                  SUPPORT THE WORK
+                </span>
+              </div>
+
+              <h3 style={{
+                fontSize: "clamp(1.8rem, 5vw, 2.5rem)",
+                fontWeight: 800,
+                letterSpacing: "-0.03em",
+                color: "#eaeaf5",
+                lineHeight: 1.2,
+                marginBottom: "1rem",
+              }}>
+                Buy me a <span style={{
+                  background: "linear-gradient(135deg, #f59e0b, #d97706)",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                }}>cup of tea</span>
+              </h3>
+
+              <p style={{
+                fontSize: "0.9rem",
+                color: "rgba(234,234,245,0.55)",
+                lineHeight: 1.6,
+                marginBottom: "1.5rem",
+                maxWidth: "420px",
+              }}>
+                Late nights, endless cups of tea, and a passion for building 
+                meaningful things. Your support keeps the code flowing and 
+                the creativity brewing. ☕✨
+              </p>
+
+              <div style={{
+                display: "flex",
+                gap: "1rem",
+                flexWrap: "wrap",
+              }}>
+                <motion.a
+                  href="https://buymeacoffee.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.98 }}
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "0.6rem",
+                    padding: "0.75rem 1.8rem",
+                    background: "linear-gradient(135deg, #f59e0b, #d97706)",
+                    color: "#fff",
+                    borderRadius: "12px",
+                    fontWeight: 700,
+                    fontSize: "0.9rem",
+                    textDecoration: "none",
+                    boxShadow: "0 8px 20px -8px rgba(245, 158, 11, 0.4)",
+                    transition: "all 0.2s ease",
+                  }}
+                >
+                  <span style={{ fontSize: "1.2rem" }}>☕</span>
+                  Buy me a tea
+                </motion.a>
+                
+                <motion.a
+                  href="https://ko-fi.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "0.6rem",
+                    padding: "0.75rem 1.5rem",
+                    background: "rgba(255, 255, 255, 0.05)",
+                    border: "1px solid rgba(255, 255, 255, 0.1)",
+                    color: "rgba(234,234,245,0.8)",
+                    borderRadius: "12px",
+                    fontWeight: 600,
+                    fontSize: "0.85rem",
+                    textDecoration: "none",
+                    transition: "all 0.2s ease",
+                  }}
+                >
+                  <span>🎁</span>
+                  Support on Ko-fi
+                </motion.a>
+              </div>
+            </div>
+          </div>
         </div>
       </motion.div>
 
       {/* ── Separator ──────────────────────────────────────── */}
       <div style={{
-        maxWidth: "900px",
+        maxWidth: "1200px",
         margin: "4rem auto 0",
         height: "1px",
-        background: "linear-gradient(90deg, transparent, rgba(167,139,250,0.15), transparent)",
+        background: "linear-gradient(90deg, transparent, rgba(167,139,250,0.2), transparent)",
       }} />
-
-
-      <style>{`
-        @keyframes float-steam {
-          0%, 100% { transform: translateX(-50%) translateY(0); opacity: 1; }
-          50% { transform: translateX(-50%) translateY(-8px); opacity: 0.7; }
-        }
-      `}</style>
 
       {/* Big PORTFOLIO wordmark */}
       <div style={{
@@ -160,7 +306,7 @@ export default function Footer() {
         marginTop: "3rem",
       }}>
         <div style={{
-          maxWidth: "1100px",
+          maxWidth: "1200px",
           margin: "0 auto",
           display: "flex",
           alignItems: "center",
@@ -211,6 +357,14 @@ export default function Footer() {
           </div>
         </div>
       </div>
+
+      {/* Add keyframes for animations */}
+      <style>{`
+        @keyframes float-steam {
+          0%, 100% { transform: translateX(-50%) translateY(0); opacity: 1; }
+          50% { transform: translateX(-50%) translateY(-8px); opacity: 0.7; }
+        }
+      `}</style>
     </footer>
   );
 }

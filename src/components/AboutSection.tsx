@@ -73,7 +73,7 @@ export default function AboutSection() {
             </h2>
             <div className="label-body">
               <p>
-                I'm a Computer Science student at <strong>Lovely Professional University</strong>, passionate about building things that live on the internet. My journey started with curiosity about how websites work — that curiosity quickly turned into a deep love for both the creative and engineering sides of development.
+                I&apos;m a Computer Science student at <strong>Lovely Professional University</strong>, passionate about building things that live on the internet. My journey started with curiosity about how websites work — that curiosity quickly turned into a deep love for both the creative and engineering sides of development.
               </p>
               <p>
                 I focus on writing clean, efficient code with a strong emphasis on performance and scalability. My background in <strong>Data Structures and Algorithms</strong> gives me an edge when approaching architecture decisions and optimizing critical code paths.

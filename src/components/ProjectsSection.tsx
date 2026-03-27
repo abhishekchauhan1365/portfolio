@@ -47,7 +47,17 @@ const projects = [
   },
 ];
 
-function ProjectCard({ p, inView, index }: { p: any, inView: boolean, index: number }) {
+interface Project {
+  title: string;
+  subtitle: string;
+  desc: string;
+  what_i_did: string[];
+  tags: string[];
+  github?: string;
+  live?: string;
+}
+
+function ProjectCard({ p, inView, index }: { p: Project, inView: boolean, index: number }) {
   const cardRef = useRef<HTMLDivElement>(null);
   const mouseX = useMotionValue(-1000);
   const mouseY = useMotionValue(-1000);
@@ -152,7 +162,7 @@ export default function ProjectsSection() {
             </h2>
             <div className="label-body">
               <p>
-                A selection of full-stack applications and machine learning pipelines I've engineered.
+                A selection of full-stack applications and machine learning pipelines I&apos;ve engineered.
               </p>
               <p>
                 Each project demonstrates complex problem-solving, architectural design, and modern technical implementations.
@@ -184,7 +194,7 @@ export default function ProjectsSection() {
         }
 
         .proj-outer {
-          max-width: 1300px;
+          max-width: 1200px;
           margin: 0 auto;
           padding: 0 1.5rem;
           display: grid;

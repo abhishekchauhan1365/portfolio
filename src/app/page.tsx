@@ -13,6 +13,7 @@ import AchievementsSection from "@/components/AchievementsSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import Background from "@/components/Background";
+import Preloader from "@/components/Preloader";
 
 export default function Home() {
   const { scrollYProgress } = useScroll();
@@ -27,8 +28,8 @@ export default function Home() {
   const mouseY = useMotionValue(-1000);
 
   // Core cursor coordinates
-  const cursorX = useTransform(mouseX, v => v - 8);
-  const cursorY = useTransform(mouseY, v => v - 8);
+  const cursorX = mouseX;
+  const cursorY = mouseY;
 
   // Follower (smooth physics)
   const smoothX = useSpring(mouseX, { stiffness: 400, damping: 25 });
@@ -57,6 +58,9 @@ export default function Home() {
 
   return (
     <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", position: "relative" }}>
+      
+      {/* Cinematic Startup Sequence */}
+      <Preloader />
       
       {/* Interactive Canvas Particle Mesh Background */}
       <Background />

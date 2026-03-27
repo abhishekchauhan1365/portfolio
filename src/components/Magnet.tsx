@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { motion, useSpring, useMotionValue } from "framer-motion";
 
 interface MagnetProps {
@@ -22,7 +22,6 @@ export default function Magnet({
   wrapperClassName = "",
   innerClassName = "",
 }: MagnetProps) {
-  const [isActive, setIsActive] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   // Motion values for smooth X/Y translation
@@ -48,14 +47,12 @@ export default function Magnet({
 
       // Check if mouse is within the magnetic field (padding distance)
       if (distX < width / 2 + padding && distY < height / 2 + padding) {
-        setIsActive(true);
         // Calculate the pull relative to the center
         const offsetX = (e.clientX - centerX) / magnetStrength;
         const offsetY = (e.clientY - centerY) / magnetStrength;
         x.set(offsetX);
         y.set(offsetY);
       } else {
-        setIsActive(false);
         x.set(0);
         y.set(0);
       }
