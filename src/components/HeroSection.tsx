@@ -54,6 +54,18 @@ export default function HeroSection() {
     ), []
   );
 
+  const projectsPulse = useMemo(() => [
+    { id: "PROJ_LIT", status: "STABLE", load: "12%", color: "#8b5cf6" },
+    { id: "CHURN_SNS", status: "BETA", load: "44%", color: "#2dd4bf" },
+    { id: "HEALTH_APP", status: "LIVE", load: "08%", color: "#f59e0b" },
+  ], []);
+
+  const healthData = useMemo(() => [
+    { label: "CPU_CORE", val: 12, max: 100 },
+    { label: "MEM_SWAP", val: 68, max: 100 },
+    { label: "NET_IO", val: 92, max: 100 },
+  ], []);
+
   const logItems = useMemo(() => [
     { label: "Solved: Trapping Rain Water (Hard)", time: "2m ago", color: "#2dd4bf" },
     { label: "Push: feat/auth → main", time: "1h ago", color: "#8b5cf6" },
@@ -234,15 +246,47 @@ export default function HeroSection() {
                   </div>
                 ))}
                 <div className="dash-tile dash-skill-tile">
-                  <span className="tile-label">CORE_SKILLSET</span>
+                  <span className="tile-label">CORE_STACK</span>
                   <div className="skill-spread">
                     <span className="s-node">React</span>
                     <span className="s-node">Next.js</span>
                     <span className="s-node">Node</span>
-                    <span className="s-node">TS</span>
                   </div>
                 </div>
               </div>
+
+              {/* Added: Project Pulse & System Health Row */}
+              <div className="dash-row-alt">
+                <div className="dash-card dash-pulse">
+                  <h3 className="card-title">Project Pulse</h3>
+                  <div className="pulse-grid">
+                    {projectsPulse.map((p) => (
+                      <div key={p.id} className="pulse-item">
+                        <div className="p-header">
+                          <span className="p-id">{p.id}</span>
+                          <span className="p-status" style={{ color: p.color, borderColor: p.color }}>{p.status}</span>
+                        </div>
+                        <div className="p-load-bar"><div className="p-fill" style={{ width: p.load, background: p.color }} /></div>
+                        <span className="p-load-text">LOAD: {p.load}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                
+                <div className="dash-card dash-health">
+                  <h3 className="card-title">System Health</h3>
+                  <div className="health-list">
+                    {healthData.map((h) => (
+                      <div key={h.label} className="health-item">
+                        <span className="h-label">{h.label}</span>
+                        <div className="h-track"><div className="h-fill" style={{ width: `${h.val}%` }} /></div>
+                        <span className="h-val">{h.val}%</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
               <div className="dash-row">
                 <div className="dash-card dash-activity">
                   <h3 className="card-title">Live Feed</h3>
@@ -277,6 +321,7 @@ export default function HeroSection() {
           </main>
         </motion.div>
       </section>
+
 
       <style>{`
         .hero-top { position: relative; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 6rem 2rem; overflow: hidden; background-color: #02020a; }
@@ -385,6 +430,23 @@ export default function HeroSection() {
         .dash-search-box span { color: rgba(255, 255, 255, 0.2); font-size: 0.8rem; }
         .dash-search-box input { background: transparent; border: none; outline: none; color: #fff; font-size: 0.7rem; width: 120px; }
 
+        .dash-row-alt { display: grid; grid-template-columns: 1.5fr 1fr; gap: 1rem; }
+        .pulse-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.8rem; }
+        .pulse-item { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05); padding: 0.8rem; border-radius: 12px; }
+        .p-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
+        .p-id { font-size: 0.6rem; font-weight: 800; color: #fff; }
+        .p-status { font-size: 0.5rem; padding: 1px 4px; border-radius: 4px; border: 1px solid; }
+        .p-load-bar { height: 2px; background: rgba(255, 255, 255, 0.05); border-radius: 2px; overflow: hidden; margin: 0.4rem 0; }
+        .p-fill { height: 100%; transition: width 1s ease-in-out; }
+        .p-load-text { font-size: 0.55rem; color: rgba(255, 255, 255, 0.2); }
+
+        .health-list { display: flex; flex-direction: column; gap: 0.8rem; }
+        .health-item { display: grid; grid-template-columns: 60px 1fr 30px; align-items: center; gap: 1rem; }
+        .h-label { font-size: 0.55rem; color: rgba(255, 255, 255, 0.25); font-weight: 800; }
+        .h-track { height: 4px; background: rgba(255, 255, 255, 0.05); border-radius: 4px; overflow: hidden; }
+        .h-fill { height: 100%; background: #8b5cf6; border-radius: 4px; }
+        .h-val { font-size: 0.6rem; color: #fff; font-weight: 800; text-align: right; }
+
         @media (max-width: 1150px) {
           .ht-main-layout { flex-direction: column; text-align: center; gap: 3rem; }
           .ht-left-pillar, .ht-right-pillar { width: 100%; align-items: center; text-align: center; }
@@ -394,7 +456,8 @@ export default function HeroSection() {
           .dash-sidebar { display: none; }
           .dash-metrics-grid { grid-template-columns: repeat(2, 1fr); }
           .dash-skill-tile { grid-column: span 2; }
-          .dash-row { grid-template-columns: 1fr; }
+          .dash-row, .dash-row-alt { grid-template-columns: 1fr; }
+          .pulse-grid { grid-template-columns: 1fr; }
         }
       `}</style>
     </>
