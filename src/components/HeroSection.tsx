@@ -11,14 +11,12 @@ export default function HeroSection() {
   const heroInView = useInView(heroRef, { once: false, amount: 0.1 });
   const dashInView = useInView(dashRef, { once: false, amount: 0.1 });
   
-  // Spotlight effect
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  // Spotlight effect (DOM only to prevent re-renders)
   const handleMouseMove = (e: React.MouseEvent) => {
     const rect = e.currentTarget.getBoundingClientRect();
     if (!rect) return;
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-    setMousePos({ x, y });
     if (heroRef.current) {
       heroRef.current.style.setProperty("--mouse-x", `${x}px`);
       heroRef.current.style.setProperty("--mouse-y", `${y}px`);
@@ -325,13 +323,13 @@ export default function HeroSection() {
 
       <style>{`
         .hero-top { position: relative; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 6rem 2rem; overflow: hidden; background-color: #02020a; }
-        .hero-orb { position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.15; pointer-events: none; }
+        .hero-orb { position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.12; pointer-events: none; transform: translateZ(0); }
         .hero-orb-1 { width: 500px; height: 500px; top: -150px; left: -150px; background: #8b5cf6; }
         .hero-orb-2 { width: 400px; height: 400px; bottom: -100px; right: -100px; background: #2dd4bf; }
         .hero-orb-3 { width: 300px; height: 300px; top: 50%; left: 50%; background: #f59e0b; opacity: 0.1; }
 
         .ht-grid-overlay { position: absolute; inset: 0; pointer-events: none; z-index: 1; background-image: linear-gradient(rgba(139, 92, 246, 0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(139, 92, 246, 0.08) 1px, transparent 1px); background-size: 50px 50px; }
-        .ht-spotlight { position: absolute; width: 600px; height: 600px; background: radial-gradient(circle, rgba(139, 92, 246, 0.2) 0%, transparent 70%); border-radius: 50%; pointer-events: none; transform: translate(-50%, -50%); top: var(--mouse-y); left: var(--mouse-x); z-index: 1; opacity: 0.6; }
+        .ht-spotlight { position: absolute; width: 600px; height: 600px; background: radial-gradient(circle, rgba(139, 92, 246, 0.2) 0%, transparent 70%); border-radius: 50%; pointer-events: none; transform: translate(calc(var(--mouse-x) - 50%), calc(var(--mouse-y) - 50%)); z-index: 1; opacity: 0.6; will-change: transform; }
 
         .ht-bg-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 24vw; font-weight: 900; color: rgba(255, 255, 255, 0.006); white-space: nowrap; pointer-events: none; z-index: 0; }
 
@@ -390,7 +388,7 @@ export default function HeroSection() {
         .dash-label-row { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 3rem; padding: 0 1.5rem; }
         .dash-eyebrow { font-family: var(--font-geist-mono); font-size: 0.7rem; color: #8b5cf6; font-weight: 800; letter-spacing: 0.1em; }
         .dash-divider { flex: 1; height: 1px; background: linear-gradient(90deg, rgba(139, 92, 246, 0.2), transparent); }
-        .dash-container { display: flex; background: rgba(4, 4, 12, 0.6); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 24px; overflow: hidden; height: 500px; }
+        .dash-container { display: flex; background: rgba(4, 4, 12, 0.75); backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 24px; overflow: hidden; height: 500px; will-change: transform; }
         .dash-sidebar { width: 220px; border-right: 1px solid rgba(255, 255, 255, 0.05); display: flex; flex-direction: column; }
         .dash-logo-box { padding: 2rem 1.5rem; display: flex; align-items: center; gap: 1rem; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
         .dash-logo-icon { width: 28px; height: 28px; background: #8b5cf6; border-radius: 6px; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 900; }

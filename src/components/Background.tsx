@@ -28,24 +28,7 @@ export default function Background() {
     resize();
 
     const drawGrid = () => {
-      ctx.strokeStyle = "rgba(124, 58, 237, 0.08)";
-      ctx.lineWidth = 1;
-
-      // Vertical lines
-      for (let x = 0; x < canvas.width; x += GRID_SIZE) {
-        ctx.beginPath();
-        ctx.moveTo(x, 0);
-        ctx.lineTo(x, canvas.height);
-        ctx.stroke();
-      }
-
-      // Horizontal lines
-      for (let y = 0; y < canvas.height; y += GRID_SIZE) {
-        ctx.beginPath();
-        ctx.moveTo(0, y);
-        ctx.lineTo(canvas.width, y);
-        ctx.stroke();
-      }
+      // Logic moved to CSS background on the wrapper for performance
     };
 
     const drawScanner = () => {
@@ -110,17 +93,23 @@ export default function Background() {
   }, []);
 
   return (
-    <canvas
-      ref={canvasRef}
+    <div
       style={{
         position: "fixed",
-        top: 0,
-        left: 0,
-        width: "100%",
-        height: "100%",
+        inset: 0,
         zIndex: 0,
-        pointerEvents: "none"
+        pointerEvents: "none",
+        backgroundImage: 'linear-gradient(rgba(124, 58, 237, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(124, 58, 237, 0.04) 1px, transparent 1px)',
+        backgroundSize: '60px 60px',
       }}
-    />
+    >
+      <canvas
+        ref={canvasRef}
+        style={{
+          width: "100%",
+          height: "100%",
+        }}
+      />
+    </div>
   );
 }
